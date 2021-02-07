@@ -1,0 +1,26 @@
+Jakub Fiebig
+Zad2
+select contactFirstName Imie,contactLastName Nazwisko, count(*)ilosc_zamowien
+from company.customers c 
+join company.orders o on c.customerNumber=o.customerNumber
+group by c.customerNumber
+Zad4
+a) 
+select p.productName as "produkt", year(o.orderDate) rok, sum(od.quantityOrdered) ilosc_sztuk from products p 
+join orderdetails od on p.productCode = od.productCode 
+join orders o on o.orderNumber = od.orderNumber 
+where p.productName in ("1952 Alpine Renault 1300", "1968 Ford Mustang", "1996 Moto Guzzi 1100i")
+group by rok, p.productName;
+b)
+select p.productName, sum(od.quantityOrdered) ilosc, year(o.orderDate) rok, month(orderDate) miesiac
+from products p 
+join orderdetails od on p.productCode = od.productCode 
+join orders o on o.orderNumber = od.orderNumber where p.productName like '%harley%'
+group by p.productName, rok, miesiac;
+c)
+select pl.productLine as linia_produkcyjna, count(p.productCode) ilosc
+from products p 
+join productlines pl on p.productLine = pl.productLine 
+group by pl.productLine 
+having count(p.productCode) between 11 and 20;
+https://github.com/jfiebig96/Egzamin
